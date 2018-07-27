@@ -10,13 +10,16 @@
 
 ## Install the requirements
 ```bash
-    pip install -r requirements.txt
-```
-```bash
+    pip install spacy
     python -m spacy download en_core_web_md
     python -m spacy link en_core_web_md en
     python -m spacy download en
 ```
+
+```bash
+    pip install -r requirements.txt
+```
+
 
 ## tool for generate training data
 
