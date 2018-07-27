@@ -1,5 +1,8 @@
 # osio-chatbot
 
+## Design
+![Alt text](https://raw.github.com/ravsa/master/osio-chatbot/diagram.jpeg)
+
 ## Create a virtualenv
 ```bash
     virtualenv -p python3 --no-site-packages --clear venv
