@@ -19,11 +19,3 @@
 ```bash
     pip install -r requirements.txt
 ```
-
-
-## tool for generate training data
-
-```bash
-    npm i -g rasa-nlu-trainer
-    rasa-nlu-trainer -v <path to the training data file>
-```
