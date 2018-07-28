@@ -28,6 +28,7 @@ class Training:
                  nlu_training_data='data/nlu_training_data.json',
                  nlu_model_config_file='configs/nlu_config.yml'):
         """Initialize the Training class object."""
+        self.max_history = 5
         self.base_path = os.path.abspath(os.path.dirname(__file__))
         self.domains_directory = os.path.join(
             self.base_path, domains_directory)
@@ -55,7 +56,7 @@ class Training:
         with open(filepath, 'w') as file:
             for yml_file in glob.glob(os.path.join(self.domains_directory, '*.yml')) +\
                     glob.glob(os.path.join(self.domains_directory, '*.yaml')):
-                yaml_data = yaml.load(open(yml_file))
+                yaml_data = yaml.safe_load(open(yml_file))
                 if yaml_data:
                     for k, v in yaml_data.items():
                         data[k].update(v)
@@ -79,7 +80,7 @@ class Training:
     def train_dialogue(self):
         """Trainer for Dialogue."""
         agent = Agent(self.get_domain_file(),
-                      policies=[MemoizationPolicy(max_history=3),
+                      policies=[MemoizationPolicy(max_history=self.max_history),
                                 ChatBotPolicy()])
 
         training_data = agent.load_data(self.dialogue_training_data_dir)

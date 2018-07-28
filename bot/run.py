@@ -8,16 +8,37 @@ from rasa_core.channels.console import ConsoleInputChannel
 from .train import Training
 
 
-training_obj = Training()
+class Bot(Training):
+    """Main Bot class to run bot."""
 
+    def __init__(self):
+        """Initialize the Bot class."""
+        super().__init__()
 
-def run(serve_forever=True):
-    """Run the server."""
-    interpreter = RasaNLUInterpreter(os.path.join(
-        training_obj.base_path, "models/nlu/default/", training_obj._model_name))
-    agent = Agent.load(os.path.join(training_obj.base_path,
-                                    "models/dialogue"), interpreter=interpreter)
+    def console_run(self, serve_forever=True):
+        """Run the Console server.
 
-    if serve_forever:
-        agent.handle_channel(ConsoleInputChannel())
-    return agent
+        serve_forever: Boolean
+        """
+        interpreter = RasaNLUInterpreter(os.path.join(
+            self.base_path, "models/nlu/default/", self._model_name))
+        agent = Agent.load(os.path.join(self.base_path,
+                                        "models/dialogue"), interpreter=interpreter)
+
+        if serve_forever:
+            agent.handle_channel(ConsoleInputChannel())
+        return agent
+
+    def run(self, text_message, message_preprocessor=None,
+            output_channel=None, sender_id='default'):
+        """Parse the user_input and return the list of responses."""
+        interpreter = RasaNLUInterpreter(os.path.join(
+            self.base_path, "models/nlu/default/", self._model_name))
+        agent = Agent.load(os.path.join(self.base_path,
+                                        "models/dialogue"), interpreter=interpreter)
+        return agent.handle_message(text_message, message_preprocessor, output_channel, sender_id)
+
+    def train(self):
+        """Train the NLU and Dialogue model."""
+        self.train_nlu()
+        self.train_dialogue()

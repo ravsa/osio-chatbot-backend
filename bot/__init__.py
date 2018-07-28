@@ -5,6 +5,7 @@
 
 import logging
 from rasa_core import utils
+from .run import Bot
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
