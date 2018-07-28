@@ -2,10 +2,6 @@
 # -*- coding: utf-8 -*-
 
 """Module to run the chatbot."""
-from bot import run, train
+from plugins import mattermost_runner
 
-T = train.Training()
-T.train_nlu()
-T.train_dialogue()
-
-run.run()
+mattermost_runner()
