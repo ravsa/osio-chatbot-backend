@@ -8,11 +8,14 @@ import glob
 import tempfile
 import os
 from rasa_nlu.training_data import load_data
+from rasa_core.channels.console import ConsoleInputChannel
 from rasa_core.agent import Agent
 from rasa_nlu import config
 from rasa_nlu.model import Trainer
 from rasa_core.policies.memoization import MemoizationPolicy
+from rasa_core.interpreter import RasaNLUInterpreter
 from .policies.chatbot_policy import ChatBotPolicy
+from rasa_core.policies.fallback import FallbackPolicy
 
 
 class Training:
@@ -79,17 +82,44 @@ class Training:
 
     def train_dialogue(self):
         """Trainer for Dialogue."""
+        fallback_policy = FallbackPolicy(fallback_action_name="utter_default",
+                                         core_threshold=0.1,
+                                         nlu_threshold=0.1)
         agent = Agent(self.get_domain_file(),
                       policies=[MemoizationPolicy(max_history=self.max_history),
-                                ChatBotPolicy()])
+                                ChatBotPolicy(),
+                                fallback_policy])
 
         training_data = agent.load_data(self.dialogue_training_data_dir)
         agent.train(
             training_data,
-            epochs=400,
+            epochs=200,
             batch_size=100,
             validation_split=0.2
         )
 
         agent.persist(self.dialogue_model_path)
+        return agent
+
+    def interactive_training(self):
+        """Online trainer for Dialogue."""
+        fallback_policy = FallbackPolicy(fallback_action_name="utter_default",
+                                         core_threshold=0.1,
+                                         nlu_threshold=0.1)
+
+        interpreter = RasaNLUInterpreter(os.path.join(
+            self.base_path, "models/nlu/default/", self._model_name))
+
+        agent = Agent(self.get_domain_file(),
+                      policies=[MemoizationPolicy(max_history=self.max_history),
+                                ChatBotPolicy(),
+                                fallback_policy],
+                      interpreter=interpreter)
+
+        agent.train_online(os.path.join(self.dialogue_training_data_dir),
+                           input_channel=ConsoleInputChannel(),
+                           max_history=self.max_history,
+                           epochs=200,
+                           batch_size=100,
+                           max_training_samples=300)
         return agent

@@ -1,5 +1,3 @@
-## story_greeting
+## story_greeting_1
 * greet
  - utter_greet
- - utter_ask_howcanhelp
- - utter_waiting

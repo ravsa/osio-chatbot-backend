@@ -1,0 +1,23 @@
+slots:
+    user_name:
+        type: text
+    email:
+        type: text
+
+intents:
+ - greet
+ - default
+
+entities:
+ - user_name
+ - email
+
+templates:
+  utter_greet:
+    - "Hi, how can I help you?"
+  utter_default:
+    - "Sorry, I don't understand that."
+
+actions:
+- utter_greet
+- utter_default

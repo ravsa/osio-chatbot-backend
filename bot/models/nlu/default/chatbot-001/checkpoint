@@ -1,2 +1,0 @@
-model_checkpoint_path: "/home/rratnawa/chatbot/osio-chatbot/bot/models/nlu/default/chatbot-001/intent_classifier_tensorflow_embedding.ckpt"
-all_model_checkpoint_paths: "/home/rratnawa/chatbot/osio-chatbot/bot/models/nlu/default/chatbot-001/intent_classifier_tensorflow_embedding.ckpt"
