@@ -6,6 +6,7 @@
 from flask import Blueprint  # , request, Response
 #  from flask.json import jsonify
 from flask_restful import Api, Resource
+from bot import Bot
 from flask_cors import CORS
 #  from .exceptions import HTTPError
 
@@ -39,4 +40,12 @@ class ApiEndpoints(Resource):
         return {'paths': sorted(_resource_paths)}
 
 
+class ChatBotQuery(Resource):
+
+    @staticmethod
+    def post(self):
+        return list()
+
+
 add_resource_no_matter_slashes(ApiEndpoints, '')
+add_resource_no_matter_slashes(ChatBotQuery, '/query')

@@ -3,33 +3,41 @@
 
 """Module to run the chatbot."""
 from bot import Bot, mattermost_runner
-from server import app
+from server import ChatBotHTTPServer
 import argparse
-
 
 if __name__ == "__main__":
 
     bot = Bot()
-    parser = argparse.ArgumentParser(description='starts the bot')
-    parser.add_argument(
-        'task',
-        choices=["train-nlu", "train-dialogue", "train-all",
-                 "train-online", "run-console", "run-mattermost",
-                 "run-server"],
-        help="what the bot should do - e.g. run or train?")
-    task = parser.parse_args().task
+    http_server = ChatBotHTTPServer()
+    parser = argparse.ArgumentParser(description='starts or runs the bot')
+    subparser = parser.add_subparsers()
+    run = subparser.add_parser('run')
+    train = subparser.add_parser('train')
+    run.add_argument(
+        'run',
+        choices=['console', 'mattermost', 'http-server']
+    )
+    train.add_argument(
+        'train',
+        choices=['nlu', 'dialogue', 'online', 'all'],
+    )
 
-    if task == "train-nlu":
-        bot.train_nlu()
-    elif task == "train-dialogue":
-        bot.train_dialogue()
-    elif task == "train-online":
-        bot.interactive_training()
-    elif task == "train-all":
-        bot.train()
-    elif task == "run-console":
-        bot.console_run()
-    elif task == "run-mattermost":
-        mattermost_runner()
-    elif task == "run-server":
-        app.run()
+    _input = vars(parser.parse_args())
+
+    if not _input:
+        parser.print_help()
+    else:
+        training = {'nlu': bot.train_nlu,
+                    'dialogue': bot.train_dialogue,
+                    'online': bot.interactive_training,
+                    'all': bot.train
+                    }.get(_input.get('train', ''), lambda: None)
+
+        run = {'console': bot.console_run,
+               'mattermost': mattermost_runner,
+               'http-server': http_server.run
+               }.get(_input.get('run', ''), lambda: None)
+
+        training()
+        run()
