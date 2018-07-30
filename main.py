@@ -3,6 +3,7 @@
 
 """Module to run the chatbot."""
 from bot import Bot, mattermost_runner
+from server import app
 import argparse
 
 
@@ -13,7 +14,8 @@ if __name__ == "__main__":
     parser.add_argument(
         'task',
         choices=["train-nlu", "train-dialogue", "train-all",
-                 "train-online", "run-console", "run-mattermost"],
+                 "train-online", "run-console", "run-mattermost",
+                 "run-server"],
         help="what the bot should do - e.g. run or train?")
     task = parser.parse_args().task
 
@@ -29,3 +31,5 @@ if __name__ == "__main__":
         bot.console_run()
     elif task == "run-mattermost":
         mattermost_runner()
+    elif task == "run-server":
+        app.run()
