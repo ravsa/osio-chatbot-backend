@@ -9,25 +9,15 @@ entities:
 - application_name
 
 intents:
- - greet
  - request_info
 
 templates:
-  utter_greet:
-    - "hey there!"
-  utter_ask_howcanhelp:
-    - "how can I help you?"
   utter_ask_application_name:
     - "Tell me your application name"
-  utter_default:
-    - "Sorry, I don't understand that."
   utter_waiting:
     - "Let me check."
 
 actions:
-- utter_greet
 - utter_waiting
-- utter_default
 - utter_ask_application_name
-- utter_ask_howcanhelp
 - bot.actions.deployed_application.FindDeployedApplication
