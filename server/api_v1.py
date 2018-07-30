@@ -3,12 +3,11 @@
 
 """Module for the api endpoints."""
 
-from flask import Blueprint  # , request, Response
-#  from flask.json import jsonify
+from flask import Blueprint, request
 from flask_restful import Api, Resource
 from bot import Bot
 from flask_cors import CORS
-#  from .exceptions import HTTPError
+from .exceptions import HTTPError
 
 app_v1 = Blueprint('api_v1', __name__, url_prefix='/api/v1')
 rest_api = Api(app_v1)
@@ -36,15 +35,38 @@ def add_resource_no_matter_slashes(resource, route,
 
 
 class ApiEndpoints(Resource):
+    """Implementation of / REST API call."""
+
     def get(self):
+        """Handle the GET REST API call."""
         return {'paths': sorted(_resource_paths)}
 
 
 class ChatBotQuery(Resource):
+    """Implementation of /query REST API call."""
 
     @staticmethod
-    def post(self):
-        return list()
+    def post():
+        """Handle the POST REST API request."""
+        bot = Bot()
+        input_json = request.get_json()
+
+        if not input_json or 'query' not in input_json:
+            raise HTTPError(400, error="Expected JSON request and query")
+
+        query = input_json.get('query')
+
+        bot_response = bot.run(query, message_postprocessor=ChatBotQuery.filter_message)
+
+        return {
+            'response': bot_response,
+            'timestamp': __import__('time').time()
+        }
+
+    @staticmethod
+    def filter_message(input_string):
+        """Format input string."""
+        return '\n'.join([txt['text'] for txt in input_string])
 
 
 add_resource_no_matter_slashes(ApiEndpoints, '')
