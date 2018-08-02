@@ -103,6 +103,330 @@
             "entity": "application"
           }
         ]
+      },
+      {
+        "text": "Can you help me with creation of quickstart?",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 33,
+            "end": 43,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 21,
+            "end": 43,
+            "value": "creation of quickstart",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "please help me with getting started in OpenShift.io",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 20,
+            "end": 35,
+            "value": "getting started",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "Can you help me with getting-started in OpenShift.io",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 21,
+            "end": 36,
+            "value": "getting-started",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "Please help me with creation of a application in OSIO",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 34,
+            "end": 45,
+            "value": "application",
+            "entity": "quickstart"
+          },
+          {
+            "start": 20,
+            "end": 45,
+            "value": "creation of a application",
+            "entity": "quickstart"
+          },
+          {
+            "start": 20,
+            "end": 45,
+            "value": "creation of a application",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "Create a quickstart for me",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 0,
+            "end": 18,
+            "value": "Create a quickstar",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with springboot and restHttp",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 25,
+            "end": 35,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 40,
+            "end": 48,
+            "value": "restHttp",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with springboot and rest",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 25,
+            "end": 35,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 40,
+            "end": 44,
+            "value": "rest",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with springboot and health check",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 25,
+            "end": 35,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 40,
+            "end": 52,
+            "value": "health check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with springboot and configMap",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 25,
+            "end": 35,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 40,
+            "end": 49,
+            "value": "configMap",
+            "entity": "mission"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with Vertx and restHttp",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 25,
+            "end": 30,
+            "value": "Vertx",
+            "entity": "runtime"
+          },
+          {
+            "start": 35,
+            "end": 43,
+            "value": "restHttp",
+            "entity": "mission"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with Vertx and health check",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "Vertx",
+            "entity": "runtime"
+          },
+          {
+            "start": 35,
+            "end": 47,
+            "value": "health check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with throntail and restHttp",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 25,
+            "end": 34,
+            "value": "throntail",
+            "entity": "runtime"
+          },
+          {
+            "start": 39,
+            "end": 47,
+            "value": "restHttp",
+            "entity": "mission"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with throntail and health check",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          },
+          {
+            "start": 25,
+            "end": 34,
+            "value": "throntail",
+            "entity": "runtime"
+          },
+          {
+            "start": 39,
+            "end": 51,
+            "value": "health check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with throntail and config map",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 25,
+            "end": 34,
+            "value": "throntail",
+            "entity": "runtime"
+          },
+          {
+            "start": 39,
+            "end": 49,
+            "value": "config map",
+            "entity": "mission"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "create a quickstart with Vertx and configMap",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 35,
+            "end": 44,
+            "value": "configMap",
+            "entity": "mission"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "Vertx",
+            "entity": "runtime"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "quickstart",
+            "entity": "quickstart"
+          }
+        ]
       }
     ]
   }
