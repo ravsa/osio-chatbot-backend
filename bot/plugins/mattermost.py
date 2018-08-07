@@ -20,8 +20,7 @@ driver = Driver({
     'debug': False
 })
 
-# login to mattermost server
-driver.login()
+
 bot = Bot()
 
 
@@ -65,4 +64,5 @@ def event_handler(message):
 
 def mattermost_runner():
     """Runner function for the mattermost."""
+    driver.login()
     driver.init_websocket(event_handler)

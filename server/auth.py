@@ -21,8 +21,9 @@ def get_audiences():
     return current_app.config.get('BAYESIAN_JWT_AUDIENCE').split(',')
 
 
-def decode_token(token):
+def decode_token():
     """Decode JWT token entered by the user."""
+    token = request.headers.get('Authorization')
     if token is None:
         return {}
 
@@ -68,8 +69,8 @@ def login_required(view):
         user = None
 
         try:
-            token = get_token_from_auth_header()
-            decoded = decode_token(token)
+            #  token = get_token_from_auth_header()
+            decoded = decode_token()
             if not decoded:
                 lgr.exception(
                     'Provide an Authorization token with the API request')

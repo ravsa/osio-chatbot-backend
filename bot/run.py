@@ -33,13 +33,20 @@ class Bot(Training):
             output_channel=None, sender_id='default'):
         """Parse the user_input and return the list of responses."""
         interpreter = RasaNLUInterpreter(os.path.join(
-            self.base_path, "models/nlu/default/", self._model_name))
-        agent = Agent.load(os.path.join(self.base_path,
+            self.tmp, "models/nlu/default/", self._model_name))
+        agent = Agent.load(os.path.join(self.tmp,
                                         "models/dialogue"), interpreter=interpreter)
         if message_postprocessor is not None:
             return message_postprocessor(agent.handle_message(text_message, message_preprocessor,
                                                               output_channel, sender_id))
         return agent.handle_message(text_message, message_preprocessor, output_channel, sender_id)
+
+    def run_nlu(self):
+        """Parse the user_input and return the list of responses."""
+        interpreter = RasaNLUInterpreter(os.path.join(
+            self.base_path, "models/nlu/default/", self._model_name))
+        while True:
+            __import__('pprint').pprint(interpreter.parse(input("Type> ")))
 
     def train(self):
         """Train the NLU and Dialogue model."""
