@@ -16,7 +16,7 @@ if __name__ == "__main__":
     train = subparser.add_parser('train')
     run.add_argument(
         'run',
-        choices=['console', 'mattermost', 'http-server']
+        choices=['console', 'mattermost', 'http-server', 'nlu']
     )
     train.add_argument(
         'train',
@@ -36,7 +36,8 @@ if __name__ == "__main__":
 
         run = {'console': bot.console_run,
                'mattermost': mattermost_runner,
-               'http-server': http_server.run
+               'http-server': http_server.run,
+               'nlu': bot.run_nlu
                }.get(_input.get('run', ''), lambda: None)
 
         training()

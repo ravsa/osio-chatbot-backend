@@ -6,6 +6,7 @@
 from flask import Flask, redirect, url_for
 from flask_appconfig import AppConfig
 from gunicorn.app.base import Application
+from .api_v1 import app_v1
 import multiprocessing
 import sys
 import os
@@ -13,20 +14,15 @@ import os
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, root_dir)
 
+app = Flask(__name__)
+AppConfig(app)
+app.register_blueprint(app_v1)
 
-def create_app(configfile=None):
-    """Return the flask app reference."""
-    from .api_v1 import app_v1
 
-    app = Flask(__name__)
-    AppConfig(app, configfile)
-    app.register_blueprint(app_v1)
-
-    @app.route('/')
-    def base_url():
-        return redirect(url_for('api_v1.apiendpoints__slashless'))
-
-    return app
+@app.route('/')
+def base_url():
+    """Redirect / to /api/v1 url."""
+    return redirect(url_for('api_v1.apiendpoints__slashless'))
 
 
 def number_of_workers():
@@ -48,4 +44,4 @@ class ChatBotHTTPServer(Application):
 
     def load(self):
         """Load the application."""
-        return create_app()
+        return app

@@ -7,7 +7,7 @@ from flask import Blueprint, request
 from flask_restful import Api, Resource
 from bot import Bot
 from flask_cors import CORS
-#  from .auth import login_required, decode_token
+from .auth import login_required, decode_token
 
 app_v1 = Blueprint('api_v1', __name__, url_prefix='/api/v1')
 rest_api = Api(app_v1)
@@ -45,14 +45,17 @@ class ApiEndpoints(Resource):
 class ChatBotQuery(Resource):
     """Implementation of /query REST API call."""
 
-    #  method_decorators = [login_required]
+    method_decorators = [login_required]
 
     @staticmethod
     def post():
         """Handle the POST REST API request."""
         bot = Bot()
         input_json = request.get_json()
-        #  decoded_token = decode_token()
+        decoded_token = decode_token()
+        user_name = 'default'
+        if decoded_token:
+            user_name = decoded_token.get('given_name')
 
         if not input_json or 'query' not in input_json:
             return dict(error="Expected JSON request and query"), 400
@@ -60,11 +63,11 @@ class ChatBotQuery(Resource):
         query = input_json.get('query')
 
         bot_response = bot.run(
-            query, message_postprocessor=ChatBotQuery.filter_message)
+            query, message_postprocessor=ChatBotQuery.filter_message, sender_id=user_name)
 
         return {
             'response': bot_response,
-            'timestamp': __import__('time').time(),
+            'timestamp': __import__('time').time()
         }
 
     @staticmethod

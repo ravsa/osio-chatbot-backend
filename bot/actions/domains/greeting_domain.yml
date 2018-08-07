@@ -3,21 +3,20 @@ slots:
         type: text
     email:
         type: text
+    handler:
+        type: text
 
 intents:
  - greet
  - default
 
-entities:
- - user_name
- - email
-
 templates:
   utter_greet:
-    - "Hi, how can I help you?"
+    - "Hi {user_name}, how can I help you?"
   utter_default:
-    - "Sorry, I don't understand that."
+    - "Sorry, I didn't understand that."
 
 actions:
 - utter_greet
 - utter_default
+- bot.actions.get_user_info.GetUserInfoAction

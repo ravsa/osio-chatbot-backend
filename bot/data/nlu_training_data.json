@@ -87,24 +87,6 @@
         "entities": []
       },
       {
-        "text": "I want to know my deployment status of my application",
-        "intent": "request_info",
-        "entities": [
-          {
-            "start": 18,
-            "end": 28,
-            "value": "deployment",
-            "entity": "deployment"
-          },
-          {
-            "start": 42,
-            "end": 53,
-            "value": "application",
-            "entity": "application"
-          }
-        ]
-      },
-      {
         "text": "Can you help me with creation of quickstart?",
         "intent": "request_create_quickstart",
         "entities": [
@@ -425,6 +407,198 @@
             "end": 19,
             "value": "quickstart",
             "entity": "quickstart"
+          }
+        ]
+      },
+      {
+        "text": "I want to create an application xyz with runtime springboot and mission resthttp",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 32,
+            "end": 35,
+            "value": "xyz",
+            "entity": "application_name"
+          },
+          {
+            "start": 49,
+            "end": 59,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 72,
+            "end": 80,
+            "value": "resthttp",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "create a small project dummy-123 with vertx and mission health-check ",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 15,
+            "end": 22,
+            "value": "project",
+            "entity": "quickstart"
+          },
+          {
+            "start": 23,
+            "end": 32,
+            "value": "dummy-123",
+            "entity": "application_name"
+          },
+          {
+            "start": 38,
+            "end": 43,
+            "value": "vertx",
+            "entity": "runtime"
+          },
+          {
+            "start": 56,
+            "end": 68,
+            "value": "health-check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "my application name is hello-world",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 23,
+            "end": 34,
+            "value": "hello-world",
+            "entity": "application_name"
+          }
+        ]
+      },
+      {
+        "text": "my mission is configmap",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 14,
+            "end": 23,
+            "value": "configmap",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "throntail is my runtime",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "throntail",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "I want vertx as runtime",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 12,
+            "value": "vertx",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "I want to create a quickstart something with runtime springboot and mission health-check",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 30,
+            "end": 39,
+            "value": "something",
+            "entity": "application_name"
+          },
+          {
+            "start": 53,
+            "end": 63,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 76,
+            "end": 88,
+            "value": "health-check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "I want to create a quickstart with application name something and runtime throntail",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 52,
+            "end": 61,
+            "value": "something",
+            "entity": "application_name"
+          },
+          {
+            "start": 74,
+            "end": 83,
+            "value": "throntail",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "I want to create an application test-001",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 32,
+            "end": 40,
+            "value": "test-001",
+            "entity": "application_name"
+          }
+        ]
+      },
+      {
+        "text": "I want to create a quickstart something",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 30,
+            "end": 39,
+            "value": "something",
+            "entity": "application_name"
+          }
+        ]
+      },
+      {
+        "text": "I want to create a application test-001211 with runtime springboot and mission rest-http",
+        "intent": "",
+        "entities": [
+          {
+            "start": 31,
+            "end": 42,
+            "value": "test-001211",
+            "entity": "application_name"
+          },
+          {
+            "start": 56,
+            "end": 66,
+            "value": "springboot",
+            "entity": "runtime"
+          },
+          {
+            "start": 79,
+            "end": 88,
+            "value": "rest-http",
+            "entity": "mission"
           }
         ]
       }
