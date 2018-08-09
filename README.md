@@ -1,7 +1,7 @@
 # osio-chatbot
 
 ## Design
-![Diagram](https://raw.github.com/ravsa/osio-chatbot/master/diagram.jpeg)
+![Diagram](https://raw.github.com/ravsa/osio-chatbot/master/diagram.png)
 
 ## Create a virtualenv
 ```bash
