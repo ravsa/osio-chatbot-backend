@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """Module to run the chatbot."""
-from bot import Bot, mattermost_runner
+from plugins.mattermost import mattermost_runner
 from server import ChatBotHTTPServer
+from bot import Bot
 import argparse
 
 if __name__ == "__main__":
