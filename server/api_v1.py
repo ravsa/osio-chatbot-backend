@@ -5,6 +5,8 @@
 
 from flask import Blueprint, request
 from flask_restful import Api, Resource
+from fuzzywuzzy import fuzz
+from requests import get
 from bot import Bot
 from flask_cors import CORS
 from .auth import login_required, decode_token
@@ -34,6 +36,27 @@ def add_resource_no_matter_slashes(resource, route,
                           defaults=defaults)
 
 
+def fake_response(query):
+    """Generate fake response."""
+    # gist url
+    url = 'https://gist.githubusercontent.com/invincibleJai/9c4f660fc8e996f1fb6bb01823f937f4\
+            /raw/5b431dde29490a72bce85b63d1805036c87dd6d7/chatResponse.json'
+    response = get(url).json()
+
+    def _filter(text):
+        threshold_point = 50
+        match_ratio = fuzz.token_sort_ratio(query, text)
+        if match_ratio >= threshold_point:
+            return match_ratio, text
+        else:
+            return -1, ''
+
+    matched_str = sorted(map(_filter, response)).pop()
+
+    if matched_str[0] != -1:
+        return response.get(matched_str[1])
+
+
 class ApiEndpoints(Resource):
     """Implementation of / REST API call."""
 
@@ -61,10 +84,10 @@ class ChatBotQuery(Resource):
             return dict(error="Expected JSON request and query"), 400
 
         query = input_json.get('query')
-
-        bot_response = bot.run(
-            query, message_postprocessor=ChatBotQuery.filter_message, sender_id=user_name)
-
+        bot_response = fake_response(query)
+        if not bot_response:
+            bot_response = bot.run(
+                query, message_postprocessor=ChatBotQuery.filter_message, sender_id=user_name)
         return {
             'response': bot_response,
             'timestamp': __import__('time').time()
