@@ -8,11 +8,8 @@ from flask_appconfig import AppConfig
 from gunicorn.app.base import Application
 from .api_v1 import app_v1
 import multiprocessing
-import sys
 import os
 
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, root_dir)
 
 app = Flask(__name__)
 AppConfig(app)
