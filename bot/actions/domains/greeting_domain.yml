@@ -14,7 +14,7 @@ templates:
   utter_greet:
     - "Hi {user_name}, how can I help you?"
   utter_default:
-    - "Sorry, I didn't understand that."
+    - "Sorry, I am unable to understand your query please reach out to <a href='https://chat.openshift.io/developers/channels/town-square' target='_blank'>MatterMost</a>"
 
 actions:
 - utter_greet
