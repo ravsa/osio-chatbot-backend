@@ -19,3 +19,70 @@
 ```bash
     pip install -r requirements.txt
 ```
+
+## Training:
+#### NLU:
+```bash
+	python main.py train nlu
+```
+	
+#### Dialogue:
+```bash
+	python main.py train dialogue
+```	
+
+#### Interactive:
+```bash
+	python main.py train online
+```
+
+## RUN:
+
+#### Console:
+```bash
+	python main.py run console
+```
+#### Mattermost:
+```bash
+	export MATTERMOST_LOGIN_ID=<USERNAME>
+	export MATTERMOST_PASSWORD=<BOT PASSWD>
+
+	python main.py run mattermost
+```
+  
+
+## http-server:
+```bash
+	python main.py run http-server
+```
+  
+> [GET] ‘api/v1’ 
+##### [Response]
+```json
+{
+    "paths": [
+        "/api/v1",
+        "/api/v1/query"
+    ]
+}
+```
+
+
+> [POST] ‘api/v1/query’
+
+##### [Request]
+
+```json
+HEADER =  {"Authorization ": "Bearer Token"}
+```
+
+```json
+PAYLOAD = { "query": "<english sentence>",  
+			"Timestamp": "<timestamp>"}
+```
+
+##### [Response]
+```json
+RESPONSE = {"response": "<english sentence>",  
+			"Timestamp": "<timestamp>"}
+```
