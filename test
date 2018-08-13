@@ -1,0 +1,1 @@
+{"mission": "rest-http", "runtime": "spring-boot", "runtimeVersion": "current-redhat", "pipeline": "maven-release", "projectName": "demoappptest", "projectVersion": "1.0.0", "groupId": "spring.boot.application", "artifactId": "spring-boot-application", "space": "1e557a45-0302-408d-880b-fceb91e59c5b", "gitRepository": "demoappptest"}

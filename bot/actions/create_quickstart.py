@@ -8,7 +8,6 @@ from fuzzywuzzy import process
 from rasa_core.actions import Action
 import requests
 import warnings
-import os
 from flask import request
 from rasa_core.events import SlotSet
 
@@ -22,7 +21,7 @@ class CreateQuickStart:
     """Create Application API class."""
 
     def __init__(self, runtime, mission, application_name, handler='rratnawa'):
-        print(runtime, mission, application_name)
+        """Initialize CreateQuickStart class object."""
         self.application_name = application_name
         self.handler = handler
         runtime_list = ['spring-boot', 'vert.x', 'throntail']
@@ -51,17 +50,15 @@ class CreateQuickStart:
         }
         self.project_version = "1.0.0"
         self.host = 'https://forge.api.openshift.io/api/osio/launch'
-        try:
-            self.token = request.headers.get('Authorization')
-        except:
-            self.token = os.getenv('PROD_TOKEN', '')
+        self.token = request.headers.get('Authorization', '')
+        if not self.token.startswith('Bearer'):
+            self.token = "Bearer {}".format(self.token)
 
-        print(self.token)
         self.headers = {
             'X-App': "osio",
             'X-Git-Provider': "GitHub",
             'Content-Type': "application/x-www-form-urlencoded",
-            'Authorization': "Bearer {}".format(self.token),
+            'Authorization': self.token
         }
 
     def get_space_id(env="prod", username='rratnawa', space='delme'):
@@ -77,6 +74,7 @@ class CreateQuickStart:
                 "Not able to fetch space name `{}`".format(space)))
 
     def create_booster(self):
+        """Create a quickstart booster function."""
         self.space = self.get_space_id()
         payload = {
             "mission": self.mission,
@@ -90,7 +88,6 @@ class CreateQuickStart:
             "space": self.space,
             "gitRepository": self.application_name
         }
-        print(payload)
         self.space = 'delme'
         self.handler = 'rratnawa'
         resp = requests.post(self.host, headers=self.headers, data=payload)
@@ -98,7 +95,7 @@ class CreateQuickStart:
             return 'https://openshift.io/{h}/{s}/create/pipelines'\
                 .format(h=self.handler, s=self.space)
         else:
-            print("failed", resp.status_code)
+            print("failed", resp.status_code, resp.content)
 
 
 class CreateQuickStartAction(Action):
@@ -109,6 +106,7 @@ class CreateQuickStartAction(Action):
         return 'action_create_quickstart'
 
     def run(self, dispatcher, tracker, domain):
+        """Execute the main logic."""
         C = CreateQuickStart(
             tracker.get_slot("runtime"),
             tracker.get_slot("mission"),
