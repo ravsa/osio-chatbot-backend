@@ -53,6 +53,8 @@ def fake_response(query):
 
     matched_str = sorted(map(_filter, response)).pop()
 
+    __import__('time').sleep(2)
+
     if matched_str[0] != -1:
         return response.get(matched_str[1])
 
