@@ -13,9 +13,7 @@ class MyProfile:
 
     def __init__(self):
         """Initialize with defaults."""
-        self.name = None
-        self.email = None
-        self.handler = None
+        self.name = self.email = self.handler = None
         try:
             decoded_token = decode_token()
             self.name = decoded_token.get('given_name')
