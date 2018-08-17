@@ -49,7 +49,7 @@ templates:
     - "Tell me your application name"
 
   utter_pipeline_link:
-    - "Here is your applicaiont {pipeline_link}"
+    - "Here is your applicaiont <a href={pipeline_link} target='_blank'>View Pipelines</a>"
   
   utter_create_quickstart_error:
     - "Sorry, I am unable to create your applicaiton"
