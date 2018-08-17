@@ -10,7 +10,7 @@ import requests
 import warnings
 from .get_user_info import MyProfile
 from flask import request
-from rasa_core.events import SlotSet
+#  from rasa_core.events import SlotSet
 
 logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore")
@@ -21,12 +21,12 @@ RED = '\033[31m {} \033[39m'
 class CreateQuickStart:
     """Create Application API class."""
 
-    def __init__(self, runtime, mission, application_name, handler):
+    def __init__(self, runtime, mission, application_name, handler, space):
         """Initialize CreateQuickStart class object."""
         self.application_name = application_name
         self.handler = handler
-        self.space = 'delme'
-        print('-----------', self.application_name, self.handler, self.space)
+        self.space = space
+        self.token = ''
         self.runtime = process.extractOne(
             runtime, ['spring-boot', 'vert.x', 'throntail'])[0]
         self.mission = process.extractOne(
@@ -53,7 +53,11 @@ class CreateQuickStart:
         }
         self.project_version = "1.0.0"
         self.host = 'https://forge.api.openshift.io/api/osio/launch'
-        self.token = request.headers.get('Authorization', '')
+        try:
+            self.token = request.headers.get('Authorization', '')
+        except Exception as exc:
+            print(RED.format("No Token Found!\n"), exc)
+
         if not self.token.startswith('Bearer'):
             self.token = "Bearer {}".format(self.token)
 
@@ -63,6 +67,8 @@ class CreateQuickStart:
             'Content-Type': "application/x-www-form-urlencoded",
             'Authorization': self.token
         }
+        __import__('pprint').pprint(self.__dict__)
+        __import__('pprint').pprint(vars())
 
     def get_space_id(self):
         """Get space ID from space name."""
@@ -90,12 +96,30 @@ class CreateQuickStart:
             "space": self.get_space_id(),
             "gitRepository": self.application_name
         }
+        __import__('pprint').pprint(self.__dict__)
+        __import__('pprint').pprint(vars())
         resp = requests.post(self.host, headers=self.headers, data=payload)
         if resp.status_code == 200:
+            print(WHITE.format("SUCCESS \n" + str(resp.content)))
             return 'https://openshift.io/{h}/{s}/create/pipelines'\
                 .format(h=self.handler, s=self.space)
         else:
-            print("failed", resp.status_code, resp.content)
+            print(RED.format("FAILED \n " +
+                             str(resp.status_code) + '\n' + str(resp.content)))
+
+
+def get_entities(tracker, entites_list):
+    """Filter entites from text."""
+    entites_set = set(entites_list)
+    filtered_entites = {en['entity']: en['value']
+                        for en in tracker.latest_message.entities}
+    return {en: filtered_entites.get(en) for en in entites_set.intersection(set(filtered_entites))}
+
+
+def set_slot(tracker, slot_dict):
+    """Set value to the slot."""
+    for k, v in slot_dict.items():
+        tracker._set_slot(k, v)
 
 
 class CreateQuickStartAction(Action):
@@ -108,16 +132,58 @@ class CreateQuickStartAction(Action):
     def run(self, dispatcher, tracker, domain):
         """Execute the main logic."""
         self.handler = tracker.get_slot('handler')
-
         if not self.handler:
-            self.handler = MyProfile().handler
+            self.handler = MyProfile().handler or ''
+
+        application_name = tracker.get_slot('application_name')
+        space_name = tracker.get_slot('space_name')
+        runtime = tracker.get_slot('runtime')
+        mission = tracker.get_slot('mission')
+
+        if not all([runtime, mission, application_name, space_name, self.handler]):
+            dispatcher.utter_template("utter_create_quickstart_error", tracker)
+            print(RED.format("[runtime, mission, application_name, space_name, self.handler]"),
+                  [runtime, mission, application_name, space_name, self.handler])
+            return []
 
         C = CreateQuickStart(
-            tracker.get_slot("runtime"),
-            tracker.get_slot("mission"),
-            tracker.get_slot("application_name"),
-            self.handler)
+            runtime, mission, application_name, self.handler, space_name)
 
         link = C.create_booster()
+        if link:
+            set_slot(tracker, {'pipeline_link': link})
+            dispatcher.utter_template("utter_pipeline_link", tracker)
+        else:
+            dispatcher.utter_template("utter_create_quickstart_error", tracker)
+        return []
 
-        return [SlotSet('pipeline_link', link)]
+
+class SpaceAction(Action):
+    """Space Action class ."""
+
+    def name(self):
+        """Return the template name."""
+        return 'action_space'
+
+    def run(self, dispatcher, tracker, domain):
+        """Execute the main logic."""
+        extracted_entites = get_entities(tracker, ['value', 'space_name'])
+        if extracted_entites.get('space_name'):
+            set_slot(tracker, extracted_entites)
+        elif extracted_entites.get('value'):
+            set_slot(tracker, {'space_name': extracted_entites.get('value')})
+        return []
+
+
+class RuntimeMissionAction(Action):
+    """RUntime Action class ."""
+
+    def name(self):
+        """Return the template name."""
+        return 'action_runtime_mission'
+
+    def run(self, dispatcher, tracker, domain):
+        """Execute the main logic."""
+        extracted_entites = get_entities(tracker, ['runtime', 'mission'])
+        set_slot(tracker, extracted_entites)
+        return []
