@@ -140,10 +140,10 @@ class CreateQuickStartAction(Action):
         runtime = tracker.get_slot('runtime')
         mission = tracker.get_slot('mission')
 
-        if not all([runtime, mission, application_name, space_name, self.handler]):
+        if not all([runtime, mission, application_name, self.handler]):
             dispatcher.utter_template("utter_create_quickstart_error", tracker)
-            print(RED.format("[runtime, mission, application_name, space_name, self.handler]"),
-                  [runtime, mission, application_name, space_name, self.handler])
+            print(RED.format("[runtime, mission, application_name, self.handler]"),
+                  [runtime, mission, application_name, self.handler])
             return []
 
         C = CreateQuickStart(
