@@ -1,7 +1,6 @@
-## story_create_quickstart01
-* request_create_quickstart{"application_name": "test","runtime": "springboot", "mission": "http"}
-    - slot{"application_name": "test"}
-    - slot{"mission": "http"}
-    - slot{"runtime": "springboot"}
+## Story - 1320XCASDD
+* request_create_quickstart{"application_name": "app-test1", "runtime":"vert.x", "mission": "configmap"}
+    - slot{"application_name": "app-test1"}
+    - slot{"runtime": "vert.x"}
+    - slot{"mission": "configmap"}
     - action_create_quickstart
-    - utter_pipeline_link

@@ -44,7 +44,7 @@ def fake_response(query):
     response = get(url).json()
 
     def _filter(text):
-        threshold_point = 50
+        threshold_point = 60
         match_ratio = fuzz.token_sort_ratio(query, text)
         if match_ratio >= threshold_point:
             return match_ratio, text
@@ -86,7 +86,8 @@ class ChatBotQuery(Resource):
             return dict(error="Expected JSON request and query"), 400
 
         query = input_json.get('query')
-        bot_response = fake_response(query)
+        #  bot_response = fake_response(query)
+        bot_response = None
         if not bot_response:
             bot_response = bot.run(
                 query, message_postprocessor=ChatBotQuery.filter_message, sender_id=user_name)

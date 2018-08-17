@@ -1,6 +1,8 @@
 slots:
     application_name:
         type: text
+    space_name:
+        type: text
     pipeline:
         type: categorical
         values:
@@ -22,10 +24,13 @@ entities:
  - runtime
  - mission
  - quickstart
+ - space_name
+ - value
 
 intents:
  - request_info
  - request_create_quickstart
+ - inform
 
 templates:
   utter_ask_mission:
@@ -34,8 +39,11 @@ templates:
   utter_ask_runtime:
   - text: "Please choose one of the available runtimes \n throntail \n vert.x \n sprint-boot"
 
-  utter_ask_mission_runtime:
-  - text: "Please tell me runtime and mission you want"
+  utter_ask_runtime_mission:
+  - text: "Please tell me your runtime and mission."
+
+  utter_ask_space_name:
+  - text: "Ok, under what space you want to create your application"
 
   utter_ask_application_name:
     - "Tell me your application name"
@@ -43,10 +51,17 @@ templates:
   utter_pipeline_link:
     - "Here is your applicaiont {pipeline_link}"
   
+  utter_create_quickstart_error:
+    - "Sorry, I am unable to create your applicaiton"
+
 actions:
 - utter_ask_mission
 - utter_pipeline_link
 - utter_ask_runtime
+- utter_ask_space_name
 - utter_ask_application_name
-- utter_ask_mission_runtime
+- utter_ask_runtime_mission
+- utter_create_quickstart_error
 - bot.actions.create_quickstart.CreateQuickStartAction
+- bot.actions.create_quickstart.SpaceAction
+- bot.actions.create_quickstart.RuntimeMissionAction

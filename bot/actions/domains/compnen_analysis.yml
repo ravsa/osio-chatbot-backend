@@ -1,0 +1,31 @@
+intents:
+ - request_component_analysis_latest_version
+ - request_component_analysis
+
+templates:
+  utter_package_details:
+    - "Package ch.qos.logback:logback-core-1.1.0 is vulnerable: CVE-2017-5929. Recommendation: use version 1.1.2"
+  utter_package_latest_version:
+    - "Latest version of ch.qos.logback:logback-core is 1.1.12"
+  utter_build_status_pass:
+    - "Yes, It has succeeded. click here to promote it to prod <a href=https://openshift.io/jakumar/spaceaug17/create/pipelines target='_blank'>View Pipelines</a>."
+  utter_build_status_fail:
+    - "No, It failed. click here to see the logs <a href=https://jenkins.openshift.io/job/invinciblejai/job/apptest542/job/master/1/console target='_blank'>Logs</a>."
+  utter_ask_theme_name:
+    - "Could you please tell me the theme."
+  utter_found_epic:
+    - "Ok, I found one epic “AI ChatBot Implementation” under the theme User Analytics and Telemetry, do you want to go ahead?"
+  utter_epic_assigned:
+    - "Ok, I have assigned it to Anindya"
+  utter_list_planner_stories:
+    - "Please find it below:\n 1. Link\n 2. Link"
+
+actions:
+- utter_package_details
+- utter_build_status_fail
+- utter_build_status_pass
+- utter_list_planner_stories
+- utter_epic_assigned
+- utter_found_epic
+- utter_ask_theme_name
+- utter_package_latest_version

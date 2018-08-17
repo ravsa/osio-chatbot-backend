@@ -75,6 +75,23 @@
         ]
       },
       {
+        "text": "please help me with getting started in OpenShift.io",
+        "intent": "request_create_quickstart",
+        "entities": []
+      },
+      {
+        "text": "Can you help me with getting-started in OpenShift.io",
+        "intent": "request_create_quickstart",
+        "entities": [
+          {
+            "start": 21,
+            "end": 36,
+            "value": "getting-started",
+            "entity": "quickstart"
+          }
+        ]
+      },
+      {
         "text": "Please help me with creation of a application in OSIO",
         "intent": "request_create_quickstart",
         "entities": [
@@ -1070,6 +1087,210 @@
         ]
       },
       {
+        "text": "delme",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "delme",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "delme-test",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "delme-test",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "delmedmaerpa",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "delmedmaerpa",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "delme-test12313",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "delme-test12313",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "delme-12313",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 11,
+            "value": "delme-12313",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "delme12313",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "delme12313",
+            "entity": "space_name"
+          }
+        ]
+      },
+      {
+        "text": "springboot",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 10,
+            "value": "springboot",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "spring-boot",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 11,
+            "value": "spring-boot",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "vert.x",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "vert.x",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "vertx",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "vertx",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "throntail",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "throntail",
+            "entity": "runtime"
+          }
+        ]
+      },
+      {
+        "text": "rest-http",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "rest-http",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "resthttp",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "resthttp",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "health-check",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "health-check",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "healthcheck",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 11,
+            "value": "healthcheck",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "configmap",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "configmap",
+            "entity": "mission"
+          }
+        ]
+      },
+      {
+        "text": "dfajpxc32ssf_12",
+        "intent": "inform",
+        "entities": [
+          {
+            "start": 0,
+            "end": 15,
+            "value": "dfajpxc32ssf_12",
+            "entity": "value"
+          }
+        ]
+      },
+      {
         "text": "I want to create an application demo-test1",
         "intent": "request_create_quickstart",
         "entities": [
@@ -1080,21 +1301,6 @@
             "entity": "application_name"
           }
         ]
-      },
-      {
-        "text": "Can you assign “chatbot implementation” epic to Anindya",
-        "intent": "request_planner_assign_epic",
-        "entities": []
-      },
-      {
-        "text": "User Analytics and Telemetry",
-        "intent": "info_theme",
-        "entities": []
-      },
-      {
-        "text": "User Analytics telemetry",
-        "intent": "info_theme",
-        "entities": []
       }
     ]
   }
