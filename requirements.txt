@@ -31,7 +31,7 @@ fbmessenger==5.3.0
 Flask==0.12.4
 flask-appconfig==0.11.1
 Flask-BabelEx==0.9.3
-Flask-Cors==3.0.6
+Flask-Cors==3.0.9
 Flask-Login==0.4.1
 Flask-Mail==0.9.1
 Flask-Principal==0.4.0
