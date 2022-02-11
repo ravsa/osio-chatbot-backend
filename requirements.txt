@@ -78,7 +78,7 @@ passlib==1.7.1
 pathlib==1.0.1
 plac==0.9.6
 preshed==1.0.1
-protobuf==3.6.0
+protobuf==3.15.0
 pycrypto==2.6.1
 PyHamcrest==1.9.0
 PyJWT==1.6.4
